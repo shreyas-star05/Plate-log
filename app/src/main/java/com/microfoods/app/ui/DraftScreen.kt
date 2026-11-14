@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -101,7 +102,7 @@ fun DraftScreen(vm: AppVm, data: AppData) {
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = Paper),
             )
         },
-        snackbarHost = { SnackbarHost(host) },
+        snackbarHost = { SnackbarHost(host, Modifier.imePadding()) },
         bottomBar = {
             Surface(shadowElevation = 8.dp, color = Color.White) {
                 Row(Modifier.fillMaxWidth().navigationBarsPadding().padding(16.dp), verticalAlignment = Alignment.CenterVertically) {

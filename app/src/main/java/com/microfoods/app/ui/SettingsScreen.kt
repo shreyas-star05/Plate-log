@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
@@ -39,6 +40,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.ui.semantics.Role
@@ -60,6 +62,7 @@ private val PIECE_FOODS = listOf("chapati" to "Chapati", "thepla" to "Thepla", "
 @Composable
 fun SettingsScreen(vm: AppVm, data: AppData) {
     val host = rememberMessages(vm)
+    val focus = LocalFocusManager.current
     val s = data.settings
     var endpoint by remember { mutableStateOf(s.endpoint) }
     var token by remember { mutableStateOf(s.token) }
@@ -90,7 +93,7 @@ fun SettingsScreen(vm: AppVm, data: AppData) {
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = Paper),
             )
         },
-        snackbarHost = { SnackbarHost(host) },
+        snackbarHost = { SnackbarHost(host, Modifier.imePadding()) },
     ) { pad ->
         Column(
             Modifier.fillMaxSize().padding(pad).padding(horizontal = 16.dp).verticalScroll(rememberScrollState()),
@@ -100,7 +103,7 @@ fun SettingsScreen(vm: AppVm, data: AppData) {
             Text("Paste the web app link and the token from the script log (README, step 4). Type demo to try the app with sample answers.", color = Quiet, style = MaterialTheme.typography.bodySmall)
             OutlinedTextField(endpoint, { endpoint = it }, label = { Text("Web app link") }, singleLine = true, modifier = Modifier.fillMaxWidth().testTag("endpoint"))
             OutlinedTextField(token, { token = it }, label = { Text("Token") }, singleLine = true, visualTransformation = PasswordVisualTransformation(), modifier = Modifier.fillMaxWidth().testTag("token"))
-            OutlinedButton(onClick = { vm.saveSettings(current()); vm.ping() }, modifier = Modifier.testTag("ping")) { Text("Save and test the connection") }
+            OutlinedButton(onClick = { focus.clearFocus(); vm.saveSettings(current()); vm.message = "Testing the connection..."; vm.ping() }, modifier = Modifier.testTag("ping")) { Text("Save and test the connection") }
 
             Section("Your kitchen")
             Text("Fill your katori with water and weigh it: grams of water = ml. Weigh one chapati as made at home.", color = Quiet, style = MaterialTheme.typography.bodySmall)

@@ -16,6 +16,7 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -41,15 +42,19 @@ fun PlateTheme(content: @Composable () -> Unit) {
     )
 }
 
-/** Shows the view model's latest message as a snackbar, once. */
+/**
+ * Shows the view model's messages as snackbars. Keyed on Unit, so clearing the message cannot cancel the
+ * snackbar that is showing it (that bug hid every message in build 4, including the connection test result).
+ */
 @Composable
 fun rememberMessages(vm: AppVm): SnackbarHostState {
     val host = remember { SnackbarHostState() }
-    val msg = vm.message
-    LaunchedEffect(msg) {
-        if (msg != null) {
-            vm.message = null
-            host.showSnackbar(msg)
+    LaunchedEffect(Unit) {
+        snapshotFlow { vm.message }.collect { m ->
+            if (m != null) {
+                host.showSnackbar(m, withDismissAction = true)
+                if (vm.message == m) vm.message = null
+            }
         }
     }
     return host
