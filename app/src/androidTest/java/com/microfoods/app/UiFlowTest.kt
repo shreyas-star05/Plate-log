@@ -90,8 +90,12 @@ class UiFlowTest {
         type("hint", "ghee roti, 3 chapati, bhendi, varan")
         shot("04-capture")
         tag("analyse").performClick()
-        waitTag("item-3")
+        // item cards below the fold are not composed yet, so wait for the first and scroll to the last
+        waitTag("item-0")
         shot("05-draft-from-ai")
+        draftTo("item-3")
+        rule.onNodeWithTag("meal-total").assert(hasText("586 kcal", substring = true))
+        draftTo("item-0")
 
         // stepper: 3 -> 3.5 -> 3 chapati
         tag("plus-0").performClick(); settle(200)
