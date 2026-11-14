@@ -221,7 +221,7 @@ object Checks {
         // ---------- accuracy ----------
         fun item(food: String, grams: Double, weighed: Double, ai: Double?, noHint: Double? = null, aiFood: String? = food): LoggedItem {
             val f = db.byId(food)!!
-            return LoggedItem("r$food$grams", "i$food", food, f.name, f.source, 1.0, "g", aiFood, 1.0, ai, noHint, grams,
+            return LoggedItem("r$food$grams", "i$food$grams", food, f.name, f.source, 1.0, "g", aiFood, 1.0, ai, noHint, if (ai == null) null else grams,
                 grams, "units", weighed, f.nutrientsFor(grams), f.per100, 0.8, null)
         }
         check("median: odd, even and empty") {
@@ -238,10 +238,22 @@ object Checks {
             near(c.itemMedian, 0.165, 0.0005); eq(c.items, 2); eq(r.testMeals, 1); eq(r.identified, 1)
             yes(!r.passes, "one meal must not pass the 20-meal test")
         }
-        check("accuracy: a method with a missing estimate on any item skips that meal") {
-            val m = Meal("m1", 0L, "d", "Lunch", "", listOf(item("chapati", 108.0, 100.0, 90.0, noHint = 80.0), item("dal", 150.0, 200.0, 180.0)), testMode = true)
+        check("accuracy: the photo-only method is skipped on meals where it never ran") {
+            val m = Meal("m1", 0L, "d", "Lunch", "", listOf(item("chapati", 108.0, 100.0, 90.0), item("dal", 150.0, 200.0, 180.0)), testMode = true)
             val photo = Accuracy.report(listOf(m)).stats.first { it.method == Accuracy.Method.PHOTO }
-            eq(photo.meals, 0); eq(photo.items, 1); near(photo.itemMedian, 0.2)
+            eq(photo.meals, 0); eq(photo.items, 0)
+        }
+        check("accuracy: a food the AI missed (you added it) counts as 0 g for the AI, not as a skipped item") {
+            val chaas = item("chaas", 170.0, 170.0, null, aiFood = null)
+            val m = Meal("m1", 0L, "d", "Lunch", "", listOf(item("chapati", 100.0, 100.0, 100.0, noHint = 80.0), chaas), testMode = true)
+            val r = Accuracy.report(listOf(m))
+            val hint = r.stats.first { it.method == Accuracy.Method.PHOTO_HINT }
+            // est 2.02311 x 100 = 202.31; truth 202.31 + 0.18845 x 170 = 234.35; error 32.04 / 234.35 = 13.67%
+            near(hint.mealKcalMedian, 0.1367, 0.0005); eq(hint.items, 2)
+            val photo = r.stats.first { it.method == Accuracy.Method.PHOTO }
+            // est 2.02311 x 80 = 161.85; error (234.35 - 161.85) / 234.35 = 30.94%
+            near(photo.mealKcalMedian, 0.3094, 0.0005)
+            near(r.confirmed.mealKcalMedian, 0.0)
         }
         check("accuracy: a swapped food or a deleted AI item counts as not identified") {
             val ok = Meal("a", 0L, "d", "Lunch", "", listOf(item("chapati", 100.0, 100.0, 100.0)), testMode = true)

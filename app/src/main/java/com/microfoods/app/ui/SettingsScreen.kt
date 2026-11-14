@@ -172,11 +172,11 @@ private fun AccuracyCard(r: Accuracy.Report) {
                 return@Column
             }
             Text("Foods named right in ${r.identified} of ${r.testMeals} meals (pass: 90%)", style = MaterialTheme.typography.bodyMedium)
-            Row { Text("Median error", Modifier.weight(1.6f), color = Quiet); Text("item g", Modifier.weight(1f), color = Quiet); Text("meal kcal", Modifier.weight(1f), color = Quiet); Text("meal P", Modifier.weight(1f), color = Quiet); Text("day kcal", Modifier.weight(1f), color = Quiet) }
+            Row { Text("Median error", Modifier.weight(1.4f), color = Quiet); Text("item g", Modifier.weight(1f), color = Quiet); Text("meal kcal", Modifier.weight(1f), color = Quiet); Text("meal P", Modifier.weight(1f), color = Quiet); Text("day kcal", Modifier.weight(1f), color = Quiet) }
             HorizontalDivider()
             r.stats.forEach { m ->
                 Row {
-                    Text(m.method.label, Modifier.weight(1.6f), fontWeight = if (m.method == Accuracy.Method.CONFIRMED) FontWeight.SemiBold else FontWeight.Normal)
+                    Text(m.method.label, Modifier.weight(1.4f), fontWeight = if (m.method == Accuracy.Method.CONFIRMED) FontWeight.SemiBold else FontWeight.Normal)
                     Text(Accuracy.pct(m.itemMedian), Modifier.weight(1f))
                     Text(Accuracy.pct(m.mealKcalMedian), Modifier.weight(1f))
                     Text(Accuracy.pct(m.mealProteinMedian), Modifier.weight(1f))

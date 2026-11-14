@@ -8,10 +8,10 @@ import kotlin.math.abs
  */
 object Accuracy {
     enum class Method(val label: String) {
-        PHOTO("Photo only"),
+        PHOTO("Photo"),
         PHOTO_HINT("Photo + hint"),
-        AI_COUNT("AI count x your sizes"),
-        CONFIRMED("After your fixes"),
+        AI_COUNT("AI count"),
+        CONFIRMED("Your fixes"),
     }
 
     // Pass line, fixed in the spec before any results: medians as fractions, identification as meals.
@@ -59,20 +59,25 @@ object Accuracy {
         return if (s.size % 2 == 1) s[m] else (s[m - 1] + s[m]) / 2
     }
 
-    fun estimate(it: LoggedItem, m: Method): Double? = when (m) {
-        Method.PHOTO -> it.aiGramsNoHint
-        Method.PHOTO_HINT -> it.aiGrams
-        Method.AI_COUNT -> it.aiUnitGrams
+    /**
+     * Grams a method gave for one item. An item the AI never reported (you added it on the draft card) counts as
+     * 0 g for the AI's methods: a missed food is part of the AI's error. The photo-only run counts only on meals
+     * where it ran at all.
+     */
+    fun estimate(it: LoggedItem, m: Method, meal: Meal? = null): Double? = when (m) {
+        Method.PHOTO -> it.aiGramsNoHint ?: if (meal != null && meal.items.any { x -> x.aiGramsNoHint != null }) 0.0 else null
+        Method.PHOTO_HINT -> it.aiGrams ?: 0.0
+        Method.AI_COUNT -> it.aiUnitGrams ?: if (it.aiGrams == null) 0.0 else null
         Method.CONFIRMED -> it.grams
     }
 
     private fun weighedItems(meal: Meal) = meal.items.filter { it.status == "active" && (it.weighedG ?: 0.0) > 0 }
 
-    /** kcal and protein the method gives for a set of items, or null if any item lacks that estimate or food values. */
-    private fun totals(items: List<LoggedItem>, m: Method): Pair<Double, Double>? {
+    /** kcal and protein a method gives for (item, its meal) pairs, or null if any item lacks an estimate or food values. */
+    private fun totals(items: List<Pair<LoggedItem, Meal>>, m: Method): Pair<Double, Double>? {
         var k = 0.0; var p = 0.0
-        for (it in items) {
-            val e = estimate(it, m) ?: return null
+        for ((it, meal) in items) {
+            val e = estimate(it, m, meal) ?: return null
             val per = it.per100 ?: return null
             k += per.kcal * e / 100; p += per.protein * e / 100
         }
@@ -101,11 +106,11 @@ object Accuracy {
             for (meal in test) {
                 val w = weighedItems(meal)
                 for (it in w) {
-                    val e = estimate(it, method) ?: continue
+                    val e = estimate(it, method, meal) ?: continue
                     itemErr += abs(e - it.weighedG!!) / it.weighedG
                     itemSigned += (e - it.weighedG) / it.weighedG
                 }
-                val est = totals(w, method) ?: continue
+                val est = totals(w.map { it to meal }, method) ?: continue
                 val tr = truth(w) ?: continue
                 rel(est.first, tr.first)?.let { mealK += it }
                 rel(est.second, tr.second)?.let { mealP += it }
@@ -113,7 +118,7 @@ object Accuracy {
             val dayK = mutableListOf<Double>()
             for ((_, dayMeals) in test.groupBy { it.day }) {
                 val w = dayMeals.flatMap(::weighedItems)
-                val est = totals(w, method) ?: continue
+                val est = totals(dayMeals.flatMap { m -> weighedItems(m).map { it to m } }, method) ?: continue
                 val tr = truth(w) ?: continue
                 rel(est.first, tr.first)?.let { dayK += it }
             }
