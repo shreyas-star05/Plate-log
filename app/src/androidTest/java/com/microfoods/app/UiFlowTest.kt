@@ -9,6 +9,7 @@ import org.junit.runner.Description
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.onAllNodesWithContentDescription
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithContentDescription
@@ -45,6 +46,14 @@ class UiFlowTest {
         override fun failed(e: Throwable?, d: Description) { runCatching { shot("fail-" + d.methodName) } }
     }
 
+    /** Closes the snackbar so it does not sit on top of the button the test taps next. */
+    private fun dismissMessage() {
+        rule.onAllNodesWithContentDescription("Dismiss").fetchSemanticsNodes().indices.forEach { _ ->
+            runCatching { rule.onAllNodesWithContentDescription("Dismiss")[0].performClick() }
+        }
+        rule.waitUntil(5_000) { rule.onAllNodesWithContentDescription("Dismiss").fetchSemanticsNodes().isEmpty() }
+    }
+
     private fun hideKeyboard() { runCatching { Espresso.closeSoftKeyboard() }; settle(300) }
 
     private fun settle(ms: Long = 600) { rule.waitForIdle(); Thread.sleep(ms); rule.waitForIdle() }
@@ -75,6 +84,7 @@ class UiFlowTest {
         // the connection test must tell you what happened (build 4 showed nothing)
         tag("ping").performScrollTo(); tag("ping").performClick()
         waitText("Connected to 'Demo'")
+        dismissMessage()
         type("katori", "160")
         type("piece-chapati", "40")
         tag("test-mode").performScrollTo(); tag("test-mode").performClick()
