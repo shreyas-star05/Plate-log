@@ -52,8 +52,8 @@ fun rememberMessages(vm: AppVm): SnackbarHostState {
     LaunchedEffect(Unit) {
         snapshotFlow { vm.message }.collect { m ->
             if (m != null) {
+                vm.message = null   // taken now, so it is not shown again on the next screen
                 host.showSnackbar(m, withDismissAction = true)
-                if (vm.message == m) vm.message = null
             }
         }
     }

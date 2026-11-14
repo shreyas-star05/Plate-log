@@ -127,6 +127,7 @@ class UiFlowTest {
         settle()
 
         // add a glass of chaas by its Marathi name
+        dismissMessage()
         draftTo("add-item"); tag("add-item").performClick()
         waitTag("food-search")
         tag("food-search").performTextInput("taak")
@@ -142,6 +143,7 @@ class UiFlowTest {
         // chapati 3 x 40 g = 120 g -> 242.77 kcal; bhindi 160 ml x 0.7 = 112 g -> 124.10;
         // moong dal 160 g -> 80.00; ghee 3 tsp = 13.65 g -> 119.85; chaas 160 g -> 30.15; total 596.9
         rule.onNodeWithTag("meal-total").assert(hasText("597 kcal", substring = true))
+        dismissMessage()
         tag("confirm").performClick()
         waitText("597 kcal")
         shot("08-today-with-meal")
