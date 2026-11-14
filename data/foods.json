@@ -1,0 +1,1418 @@
+{
+ "version": "2026.11a",
+ "katori_default_ml": 150.0,
+ "foods": [
+  {
+   "id": "chapati",
+   "name": "Chapati",
+   "aliases": [
+    "poli",
+    "roti",
+    "phulka",
+    "chapathi"
+   ],
+   "group": "veg",
+   "source": "INDB ASC096",
+   "kcal": 202.311,
+   "protein_g": 5.875,
+   "carbs_g": 35.65,
+   "fat_g": 3.561,
+   "fibre_g": 6.311,
+   "micros": {
+    "calcium_mg": 17.217,
+    "iron_mg": 2.278,
+    "zinc_mg": 1.583,
+    "magnesium_mg": 69.444,
+    "potassium_mg": 172.778,
+    "folate_ug": 16.233,
+    "vitc_mg": 0.0,
+    "vita_ug": 25.611
+   },
+   "units": {
+    "piece": 36.0
+   },
+   "katori_g_per_ml": null,
+   "assumed": [
+    "piece"
+   ]
+  },
+  {
+   "id": "rice",
+   "name": "Rice, boiled",
+   "aliases": [
+    "bhaat",
+    "chawal",
+    "plain rice",
+    "steamed rice"
+   ],
+   "group": "veg",
+   "source": "INDB ASC113",
+   "kcal": 117.19,
+   "protein_g": 2.603,
+   "carbs_g": 25.72,
+   "fat_g": 0.183,
+   "fibre_g": 1.247,
+   "micros": {
+    "calcium_mg": 2.703,
+    "iron_mg": 0.24,
+    "zinc_mg": 0.36,
+    "magnesium_mg": 8.907,
+    "potassium_mg": 47.333,
+    "folate_ug": 3.25,
+    "vitc_mg": 0.0,
+    "vita_ug": 0.0
+   },
+   "units": {
+    "plate": 300.0,
+    "katori": 120.0,
+    "tsp": 4.0,
+    "tbsp": 12.0
+   },
+   "katori_g_per_ml": 0.8,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "poha",
+   "name": "Poha",
+   "aliases": [
+    "kanda poha",
+    "pohe"
+   ],
+   "group": "veg",
+   "source": "INDB BFP044",
+   "kcal": 294.526,
+   "protein_g": 6.085,
+   "carbs_g": 35.048,
+   "fat_g": 14.138,
+   "fibre_g": 3.716,
+   "micros": {
+    "calcium_mg": 37.667,
+    "iron_mg": 3.015,
+    "zinc_mg": 1.068,
+    "magnesium_mg": 66.85,
+    "potassium_mg": 333.975,
+    "folate_ug": 21.91,
+    "vitc_mg": 12.125,
+    "vita_ug": 0.0
+   },
+   "units": {
+    "bowl": 54.6,
+    "katori": 82.5,
+    "tsp": 2.75,
+    "tbsp": 8.25
+   },
+   "katori_g_per_ml": 0.55,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "veg_poha",
+   "name": "Vegetable poha",
+   "aliases": [
+    "batata poha",
+    "mixed veg poha"
+   ],
+   "group": "veg",
+   "source": "INDB BFP045",
+   "kcal": 180.516,
+   "protein_g": 4.888,
+   "carbs_g": 21.521,
+   "fat_g": 8.069,
+   "fibre_g": 3.765,
+   "micros": {
+    "calcium_mg": 28.012,
+    "iron_mg": 1.924,
+    "zinc_mg": 0.812,
+    "magnesium_mg": 48.588,
+    "potassium_mg": 223.085,
+    "folate_ug": 22.277,
+    "vitc_mg": 7.371,
+    "vita_ug": 0.0
+   },
+   "units": {
+    "bowl": 97.8,
+    "katori": 82.5,
+    "tsp": 2.75,
+    "tbsp": 8.25
+   },
+   "katori_g_per_ml": 0.55,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "upma",
+   "name": "Upma",
+   "aliases": [
+    "rava upma",
+    "suji upma",
+    "uppit"
+   ],
+   "group": "veg",
+   "source": "INDB BFP039",
+   "kcal": 147.893,
+   "protein_g": 3.301,
+   "carbs_g": 16.313,
+   "fat_g": 7.493,
+   "fibre_g": 3.242,
+   "micros": {
+    "calcium_mg": 21.571,
+    "iron_mg": 1.096,
+    "zinc_mg": 0.588,
+    "magnesium_mg": 21.341,
+    "potassium_mg": 158.351,
+    "folate_ug": 14.24,
+    "vitc_mg": 4.369,
+    "vita_ug": 0.0
+   },
+   "units": {
+    "bowl": 106.3,
+    "katori": 90.0,
+    "tsp": 3.0,
+    "tbsp": 9.0
+   },
+   "katori_g_per_ml": 0.6,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "veg_upma",
+   "name": "Vegetable upma",
+   "aliases": [
+    "veg uppit"
+   ],
+   "group": "veg",
+   "source": "INDB BFP043",
+   "kcal": 146.468,
+   "protein_g": 4.727,
+   "carbs_g": 16.456,
+   "fat_g": 6.632,
+   "fibre_g": 4.188,
+   "micros": {
+    "calcium_mg": 26.684,
+    "iron_mg": 1.346,
+    "zinc_mg": 0.783,
+    "magnesium_mg": 33.546,
+    "potassium_mg": 208.304,
+    "folate_ug": 21.419,
+    "vitc_mg": 6.12,
+    "vita_ug": 0.0
+   },
+   "units": {
+    "plate": 235.7,
+    "katori": 90.0,
+    "tsp": 3.0,
+    "tbsp": 9.0
+   },
+   "katori_g_per_ml": 0.6,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "khichdi",
+   "name": "Khichdi",
+   "aliases": [
+    "khichadi",
+    "dal khichdi"
+   ],
+   "group": "veg",
+   "source": "INDB BFP144",
+   "kcal": 57.03,
+   "protein_g": 1.718,
+   "carbs_g": 10.042,
+   "fat_g": 1.006,
+   "fibre_g": 0.848,
+   "micros": {
+    "calcium_mg": 5.045,
+    "iron_mg": 0.305,
+    "zinc_mg": 0.217,
+    "magnesium_mg": 9.968,
+    "potassium_mg": 69.316,
+    "folate_ug": 4.561,
+    "vitc_mg": 0.145,
+    "vita_ug": 8.031
+   },
+   "units": {
+    "katori": 150.0,
+    "tsp": 5.0,
+    "tbsp": 15.0
+   },
+   "katori_g_per_ml": 1.0,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "sabudana_khichdi",
+   "name": "Sabudana khichdi",
+   "aliases": [
+    "sago khichdi"
+   ],
+   "group": "veg",
+   "source": "INDB OSR099",
+   "kcal": 187.164,
+   "protein_g": 2.721,
+   "carbs_g": 22.414,
+   "fat_g": 10.101,
+   "fibre_g": 1.824,
+   "micros": {
+    "calcium_mg": 15.129,
+    "iron_mg": 0.859,
+    "zinc_mg": 0.393,
+    "magnesium_mg": 27.714,
+    "potassium_mg": 189.277,
+    "folate_ug": 12.597,
+    "vitc_mg": 4.944,
+    "vita_ug": 45.869
+   },
+   "units": {
+    "bowl": 271.4,
+    "katori": 105.0,
+    "tsp": 3.5,
+    "tbsp": 10.5
+   },
+   "katori_g_per_ml": 0.7,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "bhindi",
+   "name": "Bhendi bhaji",
+   "aliases": [
+    "bhindi",
+    "okra",
+    "bhindi fry",
+    "bhendi"
+   ],
+   "group": "veg",
+   "source": "INDB BFP269",
+   "kcal": 110.808,
+   "protein_g": 1.83,
+   "carbs_g": 4.503,
+   "fat_g": 9.274,
+   "fibre_g": 3.569,
+   "micros": {
+    "calcium_mg": 67.883,
+    "iron_mg": 0.884,
+    "zinc_mg": 0.408,
+    "magnesium_mg": 52.601,
+    "potassium_mg": 233.035,
+    "folate_ug": 51.265,
+    "vitc_mg": 17.479,
+    "vita_ug": 0.0
+   },
+   "units": {
+    "bowl": 166.3,
+    "katori": 105.0,
+    "tsp": 3.5,
+    "tbsp": 10.5
+   },
+   "katori_g_per_ml": 0.7,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "aloo_sabzi",
+   "name": "Batata bhaji",
+   "aliases": [
+    "aloo sabzi",
+    "potato sabzi",
+    "batata"
+   ],
+   "group": "veg",
+   "source": "INDB BFP239",
+   "kcal": 89.555,
+   "protein_g": 1.518,
+   "carbs_g": 10.42,
+   "fat_g": 4.469,
+   "fibre_g": 2.422,
+   "micros": {
+    "calcium_mg": 23.736,
+    "iron_mg": 0.974,
+    "zinc_mg": 0.309,
+    "magnesium_mg": 25.295,
+    "potassium_mg": 383.448,
+    "folate_ug": 17.649,
+    "vitc_mg": 20.924,
+    "vita_ug": 0.0
+   },
+   "units": {
+    "bowl": 201.6,
+    "katori": 135.0,
+    "tsp": 4.5,
+    "tbsp": 13.5
+   },
+   "katori_g_per_ml": 0.9,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "aloo_matar",
+   "name": "Aloo matar",
+   "aliases": [
+    "batata vatana",
+    "potato peas"
+   ],
+   "group": "veg",
+   "source": "INDB ASC190",
+   "kcal": 100.923,
+   "protein_g": 3.483,
+   "carbs_g": 9.739,
+   "fat_g": 5.127,
+   "fibre_g": 3.608,
+   "micros": {
+    "calcium_mg": 21.101,
+    "iron_mg": 1.018,
+    "zinc_mg": 0.563,
+    "magnesium_mg": 27.531,
+    "potassium_mg": 274.263,
+    "folate_ug": 31.77,
+    "vitc_mg": 25.245,
+    "vita_ug": 0.0
+   },
+   "units": {
+    "bowl": 277.3,
+    "katori": 150.0,
+    "tsp": 5.0,
+    "tbsp": 15.0
+   },
+   "katori_g_per_ml": 1.0,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "cabbage",
+   "name": "Kobi bhaji",
+   "aliases": [
+    "cabbage sabzi",
+    "patta gobhi",
+    "kobi"
+   ],
+   "group": "veg",
+   "source": "INDB ASC173",
+   "kcal": 63.883,
+   "protein_g": 3.239,
+   "carbs_g": 6.235,
+   "fat_g": 2.645,
+   "fibre_g": 3.986,
+   "micros": {
+    "calcium_mg": 45.497,
+    "iron_mg": 1.101,
+    "zinc_mg": 0.476,
+    "magnesium_mg": 28.592,
+    "potassium_mg": 255.496,
+    "folate_ug": 45.683,
+    "vitc_mg": 32.989,
+    "vita_ug": 0.0
+   },
+   "units": {
+    "bowl": 166.2,
+    "katori": 90.0,
+    "tsp": 3.0,
+    "tbsp": 9.0
+   },
+   "katori_g_per_ml": 0.6,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "aloo_methi",
+   "name": "Methi batata",
+   "aliases": [
+    "aloo methi",
+    "methi bhaji"
+   ],
+   "group": "veg",
+   "source": "INDB ASC175",
+   "kcal": 135.147,
+   "protein_g": 2.246,
+   "carbs_g": 8.468,
+   "fat_g": 10.041,
+   "fibre_g": 2.927,
+   "micros": {
+    "calcium_mg": 107.796,
+    "iron_mg": 2.53,
+    "zinc_mg": 0.365,
+    "magnesium_mg": 38.24,
+    "potassium_mg": 370.244,
+    "folate_ug": 35.809,
+    "vitc_mg": 33.663,
+    "vita_ug": 0.0
+   },
+   "units": {
+    "bowl": 204.3,
+    "katori": 105.0,
+    "tsp": 3.5,
+    "tbsp": 10.5
+   },
+   "katori_g_per_ml": 0.7,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "palak_paneer",
+   "name": "Palak paneer",
+   "aliases": [],
+   "group": "veg",
+   "source": "INDB ASC215",
+   "kcal": 77.683,
+   "protein_g": 4.034,
+   "carbs_g": 4.43,
+   "fat_g": 4.763,
+   "fibre_g": 1.907,
+   "micros": {
+    "calcium_mg": 113.248,
+    "iron_mg": 1.851,
+    "zinc_mg": 0.684,
+    "magnesium_mg": 54.126,
+    "potassium_mg": 386.631,
+    "folate_ug": 90.374,
+    "vitc_mg": 20.377,
+    "vita_ug": 0.0
+   },
+   "units": {
+    "bowl": 295.5,
+    "katori": 150.0,
+    "tsp": 5.0,
+    "tbsp": 15.0
+   },
+   "katori_g_per_ml": 1.0,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "paneer_curry",
+   "name": "Paneer curry",
+   "aliases": [
+    "paneer bhaji",
+    "paneer masala"
+   ],
+   "group": "veg",
+   "source": "INDB ASC195",
+   "kcal": 176.517,
+   "protein_g": 7.801,
+   "carbs_g": 8.398,
+   "fat_g": 12.385,
+   "fibre_g": 1.399,
+   "micros": {
+    "calcium_mg": 189.057,
+    "iron_mg": 0.807,
+    "zinc_mg": 1.179,
+    "magnesium_mg": 21.831,
+    "potassium_mg": 142.717,
+    "folate_ug": 47.232,
+    "vitc_mg": 9.903,
+    "vita_ug": 0.0
+   },
+   "units": {
+    "bowl": 202.3,
+    "katori": 150.0,
+    "tsp": 5.0,
+    "tbsp": 15.0
+   },
+   "katori_g_per_ml": 1.0,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "rajma",
+   "name": "Rajma",
+   "aliases": [
+    "rajma curry",
+    "kidney beans"
+   ],
+   "group": "veg",
+   "source": "INDB ASC165",
+   "kcal": 143.726,
+   "protein_g": 5.951,
+   "carbs_g": 16.378,
+   "fat_g": 5.775,
+   "fibre_g": 5.825,
+   "micros": {
+    "calcium_mg": 47.871,
+    "iron_mg": 2.27,
+    "zinc_mg": 0.867,
+    "magnesium_mg": 58.609,
+    "potassium_mg": 485.903,
+    "folate_ug": 93.631,
+    "vitc_mg": 13.619,
+    "vita_ug": 0.0
+   },
+   "units": {
+    "bowl": 119.9,
+    "katori": 150.0,
+    "tsp": 5.0,
+    "tbsp": 15.0
+   },
+   "katori_g_per_ml": 1.0,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "moong_whole",
+   "name": "Moong usal",
+   "aliases": [
+    "whole moong",
+    "moong",
+    "sprouted moong usal"
+   ],
+   "group": "veg",
+   "source": "INDB ASC156",
+   "kcal": 53.699,
+   "protein_g": 2.249,
+   "carbs_g": 5.219,
+   "fat_g": 2.564,
+   "fibre_g": 2.017,
+   "micros": {
+    "calcium_mg": 13.581,
+    "iron_mg": 0.683,
+    "zinc_mg": 0.293,
+    "magnesium_mg": 22.527,
+    "potassium_mg": 149.155,
+    "folate_ug": 16.173,
+    "vitc_mg": 3.224,
+    "vita_ug": 0.0
+   },
+   "units": {
+    "bowl": 342.3,
+    "katori": 150.0,
+    "tsp": 5.0,
+    "tbsp": 15.0
+   },
+   "katori_g_per_ml": 1.0,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "matki",
+   "name": "Matki usal",
+   "aliases": [
+    "moth",
+    "matki",
+    "misal usal"
+   ],
+   "group": "veg",
+   "source": "INDB ASC158",
+   "kcal": 54.997,
+   "protein_g": 2.006,
+   "carbs_g": 5.741,
+   "fat_g": 2.619,
+   "fibre_g": 1.849,
+   "micros": {
+    "calcium_mg": 18.977,
+    "iron_mg": 0.947,
+    "zinc_mg": 0.228,
+    "magnesium_mg": 23.14,
+    "potassium_mg": 164.842,
+    "folate_ug": 34.051,
+    "vitc_mg": 3.224,
+    "vita_ug": 0.0
+   },
+   "units": {
+    "bowl": 342.3,
+    "katori": 150.0,
+    "tsp": 5.0,
+    "tbsp": 15.0
+   },
+   "katori_g_per_ml": 1.0,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "masoor",
+   "name": "Masoor",
+   "aliases": [
+    "whole masoor",
+    "masoor usal"
+   ],
+   "group": "veg",
+   "source": "INDB ASC157",
+   "kcal": 54.055,
+   "protein_g": 2.279,
+   "carbs_g": 5.375,
+   "fat_g": 2.518,
+   "fibre_g": 1.984,
+   "micros": {
+    "calcium_mg": 12.199,
+    "iron_mg": 0.948,
+    "zinc_mg": 0.349,
+    "magnesium_mg": 12.745,
+    "potassium_mg": 112.962,
+    "folate_ug": 14.07,
+    "vitc_mg": 3.224,
+    "vita_ug": 0.0
+   },
+   "units": {
+    "bowl": 342.3,
+    "katori": 150.0,
+    "tsp": 5.0,
+    "tbsp": 15.0
+   },
+   "katori_g_per_ml": 1.0,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "moong_dal",
+   "name": "Moong dal",
+   "aliases": [
+    "dhuli moong",
+    "yellow moong dal"
+   ],
+   "group": "veg",
+   "source": "INDB ASC151",
+   "kcal": 50.003,
+   "protein_g": 2.678,
+   "carbs_g": 5.907,
+   "fat_g": 1.681,
+   "fibre_g": 1.171,
+   "micros": {
+    "calcium_mg": 8.48,
+    "iron_mg": 0.639,
+    "zinc_mg": 0.297,
+    "magnesium_mg": 19.193,
+    "potassium_mg": 151.477,
+    "folate_ug": 10.102,
+    "vitc_mg": 0.016,
+    "vita_ug": 0.0
+   },
+   "units": {
+    "bowl": 277.0,
+    "katori": 150.0,
+    "tsp": 5.0,
+    "tbsp": 15.0
+   },
+   "katori_g_per_ml": 1.0,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "dal",
+   "name": "Dal / varan",
+   "aliases": [
+    "varan",
+    "amti",
+    "toor dal",
+    "tur dal",
+    "mixed dal",
+    "dal tadka"
+   ],
+   "group": "veg",
+   "source": "INDB ASC155",
+   "kcal": 61.928,
+   "protein_g": 2.506,
+   "carbs_g": 5.793,
+   "fat_g": 3.104,
+   "fibre_g": 1.616,
+   "micros": {
+    "calcium_mg": 10.996,
+    "iron_mg": 0.782,
+    "zinc_mg": 0.36,
+    "magnesium_mg": 19.72,
+    "potassium_mg": 144.271,
+    "folate_ug": 13.547,
+    "vitc_mg": 0.369,
+    "vita_ug": 0.0
+   },
+   "units": {
+    "bowl": 297.8,
+    "katori": 150.0,
+    "tsp": 5.0,
+    "tbsp": 15.0
+   },
+   "katori_g_per_ml": 1.0,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "omelette",
+   "name": "Omelette",
+   "aliases": [
+    "plain omelette",
+    "omlet",
+    "anda omelette"
+   ],
+   "group": "egg",
+   "source": "INDB ASC061",
+   "kcal": 272.411,
+   "protein_g": 9.664,
+   "carbs_g": 0.645,
+   "fat_g": 25.74,
+   "fibre_g": 0.116,
+   "micros": {
+    "calcium_mg": 48.402,
+    "iron_mg": 1.35,
+    "zinc_mg": 0.899,
+    "magnesium_mg": 10.218,
+    "potassium_mg": 114.077,
+    "folate_ug": 35.303,
+    "vitc_mg": 0.211,
+    "vita_ug": 138.462
+   },
+   "units": {
+    "piece": 143.0
+   },
+   "katori_g_per_ml": null,
+   "assumed": []
+  },
+  {
+   "id": "egg_curry",
+   "name": "Egg curry",
+   "aliases": [
+    "anda curry",
+    "egg masala"
+   ],
+   "group": "egg",
+   "source": "INDB BFP240",
+   "kcal": 117.521,
+   "protein_g": 5.383,
+   "carbs_g": 4.033,
+   "fat_g": 8.809,
+   "fibre_g": 2.093,
+   "micros": {
+    "calcium_mg": 41.594,
+    "iron_mg": 1.52,
+    "zinc_mg": 0.631,
+    "magnesium_mg": 21.721,
+    "potassium_mg": 198.532,
+    "folate_ug": 29.508,
+    "vitc_mg": 12.553,
+    "vita_ug": 65.316
+   },
+   "units": {
+    "bowl": 151.6,
+    "katori": 150.0,
+    "tsp": 5.0,
+    "tbsp": 15.0
+   },
+   "katori_g_per_ml": 1.0,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "chicken_curry",
+   "name": "Chicken curry",
+   "aliases": [
+    "chicken rassa",
+    "chicken masala"
+   ],
+   "group": "nonveg",
+   "source": "INDB ASC240",
+   "kcal": 129.224,
+   "protein_g": 11.795,
+   "carbs_g": 3.378,
+   "fat_g": 7.569,
+   "fibre_g": 1.406,
+   "micros": {
+    "calcium_mg": 27.29,
+    "iron_mg": 0.869,
+    "zinc_mg": 0.559,
+    "magnesium_mg": 21.893,
+    "potassium_mg": 253.485,
+    "folate_ug": 15.608,
+    "vitc_mg": 6.772,
+    "vita_ug": 4.074
+   },
+   "units": {
+    "bowl": 247.9,
+    "katori": 150.0,
+    "tsp": 5.0,
+    "tbsp": 15.0
+   },
+   "katori_g_per_ml": 1.0,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "fish_curry",
+   "name": "Fish curry",
+   "aliases": [
+    "machli curry",
+    "fish rassa"
+   ],
+   "group": "nonveg",
+   "source": "INDB ASC246",
+   "kcal": 111.128,
+   "protein_g": 8.762,
+   "carbs_g": 3.774,
+   "fat_g": 6.691,
+   "fibre_g": 1.886,
+   "micros": {
+    "calcium_mg": 52.061,
+    "iron_mg": 1.09,
+    "zinc_mg": 0.527,
+    "magnesium_mg": 24.109,
+    "potassium_mg": 241.981,
+    "folate_ug": 15.928,
+    "vitc_mg": 8.85,
+    "vita_ug": 2.626
+   },
+   "units": {
+    "bowl": 254.0,
+    "katori": 150.0,
+    "tsp": 5.0,
+    "tbsp": 15.0
+   },
+   "katori_g_per_ml": 1.0,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "curd_rice",
+   "name": "Curd rice",
+   "aliases": [
+    "dahi bhaat"
+   ],
+   "group": "veg",
+   "source": "INDB ASC126",
+   "kcal": 195.737,
+   "protein_g": 5.753,
+   "carbs_g": 32.93,
+   "fat_g": 4.317,
+   "fibre_g": 2.134,
+   "micros": {
+    "calcium_mg": 101.516,
+    "iron_mg": 0.591,
+    "zinc_mg": 0.739,
+    "magnesium_mg": 24.277,
+    "potassium_mg": 211.778,
+    "folate_ug": 13.063,
+    "vitc_mg": 2.359,
+    "vita_ug": 7.934
+   },
+   "units": {
+    "plate": 216.2,
+    "katori": 135.0,
+    "tsp": 4.5,
+    "tbsp": 13.5
+   },
+   "katori_g_per_ml": 0.9,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "chaas",
+   "name": "Chaas",
+   "aliases": [
+    "taak",
+    "buttermilk",
+    "salted lassi"
+   ],
+   "group": "veg",
+   "source": "INDB ASC022",
+   "kcal": 18.845,
+   "protein_g": 1.355,
+   "carbs_g": 1.856,
+   "fat_g": 0.719,
+   "fibre_g": 0.018,
+   "micros": {
+    "calcium_mg": 47.784,
+    "iron_mg": 0.036,
+    "zinc_mg": 0.168,
+    "magnesium_mg": 4.84,
+    "potassium_mg": 67.374,
+    "folate_ug": 4.269,
+    "vitc_mg": 0.241,
+    "vita_ug": 6.615
+   },
+   "units": {
+    "glass": 423.2,
+    "katori": 150.0,
+    "tsp": 5.0,
+    "tbsp": 15.0
+   },
+   "katori_g_per_ml": 1.0,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "shrikhand",
+   "name": "Shrikhand",
+   "aliases": [],
+   "group": "veg",
+   "source": "INDB OSR024",
+   "kcal": 107.177,
+   "protein_g": 5.274,
+   "carbs_g": 16.016,
+   "fat_g": 2.894,
+   "fibre_g": 0.079,
+   "micros": {
+    "calcium_mg": 183.019,
+    "iron_mg": 0.165,
+    "zinc_mg": 0.659,
+    "magnesium_mg": 18.364,
+    "potassium_mg": 261.063,
+    "folate_ug": 16.558,
+    "vitc_mg": 0.917,
+    "vita_ug": 25.333
+   },
+   "units": {
+    "bowl": 304.6,
+    "katori": 165.0,
+    "tsp": 5.5,
+    "tbsp": 16.5
+   },
+   "katori_g_per_ml": 1.1,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "thepla",
+   "name": "Methi thepla",
+   "aliases": [
+    "thepla"
+   ],
+   "group": "veg",
+   "source": "INDB OSR104",
+   "kcal": 346.156,
+   "protein_g": 8.98,
+   "carbs_g": 41.339,
+   "fat_g": 15.945,
+   "fibre_g": 7.56,
+   "micros": {
+    "calcium_mg": 73.51,
+    "iron_mg": 4.521,
+    "zinc_mg": 1.802,
+    "magnesium_mg": 83.171,
+    "potassium_mg": 298.367,
+    "folate_ug": 41.882,
+    "vitc_mg": 2.92,
+    "vita_ug": 4.714
+   },
+   "units": {
+    "piece": 36.4
+   },
+   "katori_g_per_ml": null,
+   "assumed": []
+  },
+  {
+   "id": "pav_bhaji",
+   "name": "Pav bhaji (bhaji)",
+   "aliases": [
+    "pav bhaji"
+   ],
+   "group": "veg",
+   "source": "INDB OSR112",
+   "kcal": 96.525,
+   "protein_g": 2.66,
+   "carbs_g": 11.993,
+   "fat_g": 4.318,
+   "fibre_g": 1.98,
+   "micros": {
+    "calcium_mg": 24.86,
+    "iron_mg": 0.969,
+    "zinc_mg": 0.182,
+    "magnesium_mg": 12.692,
+    "potassium_mg": 139.301,
+    "folate_ug": 29.335,
+    "vitc_mg": 13.159,
+    "vita_ug": 40.056
+   },
+   "units": {
+    "katori": 150.0,
+    "tsp": 5.0,
+    "tbsp": 15.0
+   },
+   "katori_g_per_ml": 1.0,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "chai",
+   "name": "Chai",
+   "aliases": [
+    "chaha",
+    "tea",
+    "milk tea"
+   ],
+   "group": "veg",
+   "source": "INDB ASC001",
+   "kcal": 16.144,
+   "protein_g": 0.388,
+   "carbs_g": 2.582,
+   "fat_g": 0.532,
+   "fibre_g": 0.0,
+   "micros": {
+    "calcium_mg": 14.204,
+    "iron_mg": 0.022,
+    "zinc_mg": 0.041,
+    "magnesium_mg": 1.036,
+    "potassium_mg": 13.945,
+    "folate_ug": 0.856,
+    "vitc_mg": 0.239,
+    "vita_ug": 0.0
+   },
+   "units": {
+    "cup": 210.5,
+    "katori": 150.0,
+    "tsp": 5.0,
+    "tbsp": 15.0
+   },
+   "katori_g_per_ml": 1.0,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "dahi",
+   "name": "Dahi (plain curd)",
+   "aliases": [
+    "curd",
+    "dahi",
+    "yogurt",
+    "dahi katori"
+   ],
+   "group": "veg",
+   "source": "UK CoFID L520 (via INDB repo)",
+   "kcal": 79.0,
+   "protein_g": 5.7,
+   "carbs_g": 7.8,
+   "fat_g": 3.0,
+   "fibre_g": 0.0,
+   "micros": {
+    "calcium_mg": 200.0,
+    "iron_mg": 0.1,
+    "zinc_mg": 0.7,
+    "magnesium_mg": 19.0,
+    "potassium_mg": 280.0,
+    "folate_ug": 18.0,
+    "vitc_mg": 1.0,
+    "vita_ug": 28.0
+   },
+   "units": {
+    "katori": 154.5,
+    "tsp": 5.15,
+    "tbsp": 15.45
+   },
+   "katori_g_per_ml": 1.03,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "ghee",
+   "name": "Ghee",
+   "aliases": [
+    "toop",
+    "tup"
+   ],
+   "group": "addon",
+   "source": "UK CoFID T506 (via INDB repo)",
+   "kcal": 878.0,
+   "protein_g": 0.1,
+   "carbs_g": 0.0,
+   "fat_g": 97.6,
+   "fibre_g": 0.0,
+   "micros": {
+    "calcium_mg": 1.0,
+    "iron_mg": 0.0,
+    "zinc_mg": 0.0,
+    "magnesium_mg": 0.0,
+    "potassium_mg": 0.0,
+    "folate_ug": 0.0,
+    "vitc_mg": 0.0,
+    "vita_ug": 922.0
+   },
+   "units": {
+    "katori": 136.5,
+    "tsp": 4.55,
+    "tbsp": 13.65
+   },
+   "katori_g_per_ml": 0.91,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "butter",
+   "name": "Butter",
+   "aliases": [
+    "loni",
+    "amul butter"
+   ],
+   "group": "addon",
+   "source": "UK CoFID T500 (via INDB repo)",
+   "kcal": 744.0,
+   "protein_g": 0.6,
+   "carbs_g": 0.6,
+   "fat_g": 82.2,
+   "fibre_g": 0.0,
+   "micros": {
+    "calcium_mg": 18.0,
+    "iron_mg": 0.0,
+    "zinc_mg": 0.1,
+    "magnesium_mg": 2.0,
+    "potassium_mg": 27.0,
+    "folate_ug": 0.0,
+    "vitc_mg": 0.0,
+    "vita_ug": 958.0
+   },
+   "units": {
+    "katori": 142.5,
+    "tsp": 4.75,
+    "tbsp": 14.25
+   },
+   "katori_g_per_ml": 0.95,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "oil",
+   "name": "Oil",
+   "aliases": [
+    "tel",
+    "sunflower oil",
+    "cooking oil"
+   ],
+   "group": "addon",
+   "source": "UK CoFID T508 (via INDB repo)",
+   "kcal": 899.0,
+   "protein_g": 0.0,
+   "carbs_g": 0.0,
+   "fat_g": 99.9,
+   "fibre_g": 0.0,
+   "micros": {
+    "calcium_mg": 0.0,
+    "iron_mg": 0.1,
+    "zinc_mg": 0.0,
+    "magnesium_mg": 0.0,
+    "potassium_mg": 0.0,
+    "folate_ug": 0.0,
+    "vitc_mg": 0.0,
+    "vita_ug": 0.0
+   },
+   "units": {
+    "katori": 138.0,
+    "tsp": 4.6,
+    "tbsp": 13.8
+   },
+   "katori_g_per_ml": 0.92,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "sugar",
+   "name": "Sugar",
+   "aliases": [
+    "sakhar",
+    "cheeni"
+   ],
+   "group": "addon",
+   "source": "UK CoFID I502 (via INDB repo)",
+   "kcal": 394.0,
+   "protein_g": 0.0,
+   "carbs_g": 105.0,
+   "fat_g": 0.0,
+   "fibre_g": 0.0,
+   "micros": {
+    "calcium_mg": 10.0,
+    "iron_mg": 0.2,
+    "zinc_mg": 0.1,
+    "magnesium_mg": 2.0,
+    "potassium_mg": 5.0,
+    "folate_ug": 0.0,
+    "vitc_mg": 0.0,
+    "vita_ug": 0.0
+   },
+   "units": {
+    "katori": 127.5,
+    "tsp": 4.25,
+    "tbsp": 12.75
+   },
+   "katori_g_per_ml": 0.85,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "pav",
+   "name": "Pav / bread",
+   "aliases": [
+    "pav",
+    "ladi pav",
+    "bread",
+    "bun",
+    "slice bread"
+   ],
+   "group": "veg",
+   "source": "UK CoFID U511 (via INDB repo)",
+   "kcal": 236.0,
+   "protein_g": 8.7,
+   "carbs_g": 48.7,
+   "fat_g": 2.1,
+   "fibre_g": 2.9,
+   "micros": {
+    "calcium_mg": 155.0,
+    "iron_mg": 1.5,
+    "zinc_mg": 0.7,
+    "magnesium_mg": 22.0,
+    "potassium_mg": 134.0,
+    "folate_ug": 29.0,
+    "vitc_mg": 0.0,
+    "vita_ug": 0.0
+   },
+   "units": {
+    "piece": 40.0
+   },
+   "katori_g_per_ml": null,
+   "assumed": [
+    "piece"
+   ]
+  },
+  {
+   "id": "peanuts",
+   "name": "Peanuts, roasted",
+   "aliases": [
+    "shengdana",
+    "moongphali"
+   ],
+   "group": "veg",
+   "source": "UK CoFID B505 (via INDB repo)",
+   "kcal": 590.0,
+   "protein_g": 25.7,
+   "carbs_g": 10.3,
+   "fat_g": 49.8,
+   "fibre_g": 7.6,
+   "micros": {
+    "calcium_mg": 52.0,
+    "iron_mg": 2.1,
+    "zinc_mg": 3.3,
+    "magnesium_mg": 190.0,
+    "potassium_mg": 730.0,
+    "folate_ug": 44.0,
+    "vitc_mg": 0.0,
+    "vita_ug": 0.0
+   },
+   "units": {
+    "katori": 90.0,
+    "tsp": 3.0,
+    "tbsp": 9.0
+   },
+   "katori_g_per_ml": 0.6,
+   "assumed": [
+    "katori",
+    "tsp",
+    "tbsp"
+   ]
+  },
+  {
+   "id": "egg_boiled",
+   "name": "Boiled egg",
+   "aliases": [
+    "egg",
+    "anda",
+    "ukadlela anda",
+    "boiled egg"
+   ],
+   "group": "egg",
+   "source": "USDA FDC 173424",
+   "kcal": 155.0,
+   "protein_g": 12.58,
+   "carbs_g": 1.12,
+   "fat_g": 10.61,
+   "fibre_g": 0.0,
+   "micros": {},
+   "units": {
+    "piece": 50.0
+   },
+   "katori_g_per_ml": null,
+   "assumed": [
+    "piece"
+   ]
+  }
+ ]
+}

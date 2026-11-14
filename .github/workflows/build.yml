@@ -1,0 +1,116 @@
+name: Build APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Test the Sheet script (Apps Script, with fakes)
+        run: node --test apps-script/test/run.js
+
+      - name: Test the core (food list, portions, meals, accuracy), then build the APK
+        run: |
+          chmod +x gradlew
+          ./gradlew :core:test :app:assembleRelease --no-daemon --stacktrace
+
+      - name: Name the files
+        run: |
+          cp app/build/outputs/apk/release/app-release.apk MicroFoods.apk
+          mkdir -p sheet-script && cp apps-script/Code.gs apps-script/appsscript.json sheet-script/
+          cd sheet-script && zip -q ../MicroFoods-sheet-script.zip *
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: MicroFoods
+          path: |
+            MicroFoods.apk
+            MicroFoods-sheet-script.zip
+
+      - name: Publish as a release (easy phone download)
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: build-${{ github.run_number }}
+          name: Micro Foods 0.1 build ${{ github.run_number }}
+          body: |
+            MicroFoods.apk: install on your phone (allow installs from your browser or Files app).
+            MicroFoods-sheet-script.zip: the Apps Script for your Google Sheet (README, steps 1 to 4).
+          files: |
+            MicroFoods.apk
+            MicroFoods-sheet-script.zip
+
+  ui-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Build the app and its UI tests, and run Android lint
+        run: |
+          chmod +x gradlew
+          ./gradlew :app:assembleDebug :app:assembleDebugAndroidTest :app:lintDebug --no-daemon
+          mkdir -p ui-out && cp app/build/lint.txt ui-out/lint.txt || true
+          tail -5 ui-out/lint.txt || true
+
+      - name: Free disk space for the emulator
+        run: |
+          sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/share/boost /usr/local/lib/node_modules /usr/share/swift /opt/hostedtoolcache/CodeQL || true
+          df -h / | tail -1
+
+      - name: Enable KVM for the emulator
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Tap through the app on an emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          target: google_apis
+          arch: x86_64
+          profile: pixel_6
+          disable-animations: true
+          disk-size: 3000M
+          script: bash .github/ui-test.sh
+
+      - name: Pack the screenshots and logs
+        if: always()
+        run: cd ui-out && zip -qr ../ui-check.zip . || true
+
+      - name: Publish the UI check (screenshots, logs)
+        if: always()
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ui-check-${{ github.run_number }}
+          name: UI check ${{ github.run_number }}
+          prerelease: true
+          make_latest: false
+          body: Emulator run of the whole 0.1 loop in demo mode. Screenshots of every screen, lint report and logs.
+          files: ui-check.zip
