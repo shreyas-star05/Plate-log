@@ -40,6 +40,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.foundation.selection.toggleable
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
@@ -122,12 +124,15 @@ fun SettingsScreen(vm: AppVm, data: AppData) {
             }
 
             Section("Accuracy test")
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Row(
+                Modifier.fillMaxWidth().toggleable(value = testMode, role = Role.Switch, onValueChange = { testMode = it; vm.saveSettings(current()) }).testTag("test-mode"),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
                 Column(Modifier.weight(1f)) {
                     Text("Test mode")
                     Text("Adds a weighed-grams box to every item and asks the AI twice (with and without your hint).", color = Quiet, style = MaterialTheme.typography.bodySmall)
                 }
-                Switch(checked = testMode, onCheckedChange = { testMode = it; vm.saveSettings(current()) }, modifier = Modifier.testTag("test-mode"))
+                Switch(checked = testMode, onCheckedChange = null)
             }
             AccuracyCard(Accuracy.report(data.meals))
 
@@ -150,10 +155,10 @@ private fun Section(t: String) {
 }
 
 @Composable
-private fun NumberField(label: String, value: String, tag: String, modifier: Modifier = Modifier.fillMaxWidth(), onChange: (String) -> Unit) {
+private fun NumberField(label: String, value: String, tag: String, modifier: Modifier = Modifier, onChange: (String) -> Unit) {
     OutlinedTextField(
         value, { v -> onChange(v.filter { it.isDigit() || it == '.' }.take(7)) }, label = { Text(label) }, singleLine = true,
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal), modifier = modifier.testTag(tag),
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal), modifier = modifier.fillMaxWidth().testTag(tag),
     )
 }
 

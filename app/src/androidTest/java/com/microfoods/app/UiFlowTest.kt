@@ -2,6 +2,10 @@ package com.microfoods.app
 
 import android.graphics.Bitmap
 import androidx.compose.ui.test.assert
+import androidx.compose.ui.test.assertIsOn
+import androidx.test.espresso.Espresso
+import org.junit.rules.TestWatcher
+import org.junit.runner.Description
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
@@ -33,8 +37,15 @@ import java.io.FileOutputStream
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 class UiFlowTest {
-    @get:Rule val rule = createAndroidComposeRule<MainActivity>()
+    @get:Rule(order = 1) val rule = createAndroidComposeRule<MainActivity>()
     private val inst get() = InstrumentationRegistry.getInstrumentation()
+
+    /** A screenshot of whatever was on screen when a test failed. */
+    @get:Rule(order = 2) val onFail = object : TestWatcher() {
+        override fun failed(e: Throwable?, d: Description) { runCatching { shot("fail-" + d.methodName) } }
+    }
+
+    private fun hideKeyboard() { runCatching { Espresso.closeSoftKeyboard() }; settle(300) }
 
     private fun settle(ms: Long = 600) { rule.waitForIdle(); Thread.sleep(ms); rule.waitForIdle() }
 
@@ -47,7 +58,7 @@ class UiFlowTest {
     }
 
     private fun tag(t: String) = rule.onNodeWithTag(t)
-    private fun type(t: String, text: String) { tag(t).performScrollTo(); tag(t).performTextClearance(); tag(t).performTextInput(text) }
+    private fun type(t: String, text: String) { tag(t).performScrollTo(); tag(t).performTextClearance(); tag(t).performTextInput(text); hideKeyboard() }
     private fun waitTag(t: String, ms: Long = 15_000) = rule.waitUntil(ms) { rule.onAllNodesWithTag(t).fetchSemanticsNodes().isNotEmpty() }
     private fun waitText(t: String, ms: Long = 15_000) = rule.waitUntil(ms) { rule.onAllNodesWithText(t, substring = true).fetchSemanticsNodes().isNotEmpty() }
     private fun draftTo(t: String) { tag("draft-list").performScrollToNode(hasTestTag(t)) }
@@ -64,12 +75,14 @@ class UiFlowTest {
         type("katori", "160")
         type("piece-chapati", "40")
         tag("test-mode").performScrollTo(); tag("test-mode").performClick()
+        tag("test-mode").assertIsOn()
         tag("save-settings").performScrollTo(); tag("save-settings").performClick()
         settle()
         tag("endpoint").performScrollTo()
         shot("03-settings-filled")
         rule.onNodeWithContentDescription("Back").performClick()
         settle()
+        waitText("Accuracy test is on")
 
         tag("daytype-Gym").performClick()
         tag("log-meal").performClick()
@@ -89,6 +102,7 @@ class UiFlowTest {
         // swap varan (dal) for moong dal through the picker
         draftTo("item-name-2"); tag("item-name-2").performClick()
         settle()
+        waitTag("food-search")
         tag("food-search").performTextInput("moong")
         waitTag("food-moong_dal")
         shot("06-food-picker")
@@ -97,7 +111,7 @@ class UiFlowTest {
 
         // add a glass of chaas by its Marathi name
         draftTo("add-item"); tag("add-item").performClick()
-        settle()
+        waitTag("food-search")
         tag("food-search").performTextInput("taak")
         waitTag("food-chaas")
         tag("food-chaas").performClick()
@@ -157,6 +171,7 @@ class UiFlowTest {
         tag("manual").performClick()
         settle()
         tag("add-item").performClick()
+        waitTag("food-search")
         tag("food-search").performTextInput("whey")
         waitTag("food-my_muscleblaze_whey")
         tag("food-my_muscleblaze_whey").performClick()

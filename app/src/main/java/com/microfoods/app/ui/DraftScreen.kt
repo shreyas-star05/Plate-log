@@ -73,6 +73,9 @@ import com.microfoods.core.Days
 import com.microfoods.core.DraftItem
 import com.microfoods.core.FoodDb
 import com.microfoods.core.Nutrients
+import com.microfoods.core.Portions
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 
 /** Marker for "add a new line" in the food picker. */
 private const val NEW_LINE = "\u0000new"
@@ -158,7 +161,7 @@ fun DraftScreen(vm: AppVm, data: AppData) {
                 }
             }
             itemsIndexed(d.items, key = { _, it -> it.key }) { i, item ->
-                ItemCard(i, item, db, vm, test, onPick = { pickerFor = item.key })
+                ItemCard(i, item, db, p, vm, test, onPick = { pickerFor = item.key })
             }
             if (!d.loading) item {
                 OutlinedButton(onClick = { pickerFor = NEW_LINE }, modifier = Modifier.fillMaxWidth().testTag("add-item")) {
@@ -177,10 +180,10 @@ fun DraftScreen(vm: AppVm, data: AppData) {
 }
 
 @Composable
-private fun ItemCard(i: Int, item: DraftItem, db: FoodDb, vm: AppVm, test: Boolean, onPick: () -> Unit) {
+private fun ItemCard(i: Int, item: DraftItem, db: FoodDb, p: Portions, vm: AppVm, test: Boolean, onPick: () -> Unit) {
     val food = db.byId(item.foodId)
-    val grams = vm.gramsOf(item)
-    val n = item.nutrients(db, vm.data.value.settings.portions)
+    val grams = item.grams(db, p)
+    val n = item.nutrients(db, p)
     Card(colors = CardDefaults.cardColors(containerColor = Color.White), modifier = Modifier.fillMaxWidth().testTag("item-$i")) {
         Column(Modifier.padding(start = 14.dp, end = 6.dp, top = 10.dp, bottom = 10.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -209,7 +212,7 @@ private fun ItemCard(i: Int, item: DraftItem, db: FoodDb, vm: AppVm, test: Boole
                     Text(if (n != null) "${fmt0(n.kcal)} kcal · ${fmt1(n.protein)} g P" else "no values", color = Quiet, style = MaterialTheme.typography.bodySmall)
                 }
             }
-            if (item.gramsSource(db, vm.data.value.settings.portions) == "model") {
+            if (item.gramsSource(db, p) == "model") {
                 Text("No weight for '${item.unit}' on this food: using the AI's ${fmt0(item.aiGrams)} g. Pick another unit to fix.", color = Chilli, style = MaterialTheme.typography.bodySmall)
             }
             if (test) {
@@ -244,9 +247,12 @@ private fun UnitMenu(i: Int, item: DraftItem, choices: List<String>, onPick: (St
 fun FoodPicker(db: FoodDb, onDismiss: () -> Unit, onPick: (com.microfoods.core.Food) -> Unit) {
     var q by remember { mutableStateOf("") }
     val results = remember(q, db.foods.size) { db.search(q, 40) }
+    val keyboard = LocalSoftwareKeyboardController.current
+    val focus = LocalFocusManager.current
+    fun close() { focus.clearFocus(); keyboard?.hide() }
     AlertDialog(
-        onDismissRequest = onDismiss,
-        confirmButton = { TextButton(onClick = onDismiss) { Text("Close") } },
+        onDismissRequest = { close(); onDismiss() },
+        confirmButton = { TextButton(onClick = { close(); onDismiss() }) { Text("Close") } },
         title = { Text("Pick a food") },
         text = {
             Column {
@@ -257,7 +263,7 @@ fun FoodPicker(db: FoodDb, onDismiss: () -> Unit, onPick: (com.microfoods.core.F
                 Spacer(Modifier.height(8.dp))
                 LazyColumn(Modifier.heightIn(max = 360.dp)) {
                     items(results, key = { it.id }) { f ->
-                        Column(Modifier.fillMaxWidth().clickable { onPick(f) }.padding(vertical = 10.dp).testTag("food-${f.id}")) {
+                        Column(Modifier.fillMaxWidth().clickable { close(); onPick(f) }.padding(vertical = 10.dp).testTag("food-${f.id}")) {
                             Text(f.name, fontWeight = FontWeight.Medium)
                             Text("${fmt0(f.per100.kcal)} kcal · ${fmt1(f.per100.protein)} g P per 100 g · ${f.source}", color = Quiet, style = MaterialTheme.typography.bodySmall)
                         }

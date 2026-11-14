@@ -48,8 +48,8 @@ fun rememberMessages(vm: AppVm): SnackbarHostState {
     val msg = vm.message
     LaunchedEffect(msg) {
         if (msg != null) {
+            vm.message = null
             host.showSnackbar(msg)
-            if (vm.message == msg) vm.message = null
         }
     }
     return host
