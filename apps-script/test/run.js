@@ -175,6 +175,20 @@ test('append saves a queued photo once and links it on that meal’s rows', () =
   assert.equal(env.store.PHOTO_FOLDER_ID, 'folder1');
 });
 
+test('a Drive permission error does not stop the meal being logged', () => {
+  const T = 't'.repeat(32);
+  const env = makeEnv({ TOKEN: T, GEMINI_API_KEY: 'k' });
+  env.ctx.DriveApp.createFolder = () => { throw new Error('You do not have permission to call DriveApp.createFolder.'); };
+  const r = env.post({ token: T, action: 'append', rows: [row('a')], meals: [{ meal_id: 'm1', photo_b64: 'aGk=', mime: 'image/jpeg' }] });
+  assert.equal(r.ok, true); assert.equal(r.added, 1);
+  assert.match(r.photo_error, /Drive permission missing/);
+  assert.equal(env.sheets.Log.getLastRow(), 2);
+  env.responses.push(geminiOk([{ food_id: 'chapati', seen_as: 'Chapati', qty: 2, unit: 'piece', est_grams: 70, confidence: 0.9 }]));
+  const a = env.post({ token: T, action: 'analyze', foods: FOODS, image_b64: 'aGk=', save_photo: true, meal_id: 'm2' });
+  assert.equal(a.ok, true); assert.equal(a.items.length, 1); assert.equal(a.photo_url, undefined);
+  assert.match(a.photo_error, /Drive permission missing/);
+});
+
 test('days are inserted once and updated in place', () => {
   const T = 't'.repeat(32);
   const env = makeEnv({ TOKEN: T });

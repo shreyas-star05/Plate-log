@@ -74,7 +74,7 @@ INDB states no licence, so this repo stays private.
 - `core` (pure Kotlin): 40 checks covering the food list, search by Marathi and Hindi names, portions, the 4 AM day
   boundary, parsing the AI's answer, confirm, Sheet rows, the accuracy report, and saving and loading. Expected
   numbers are worked out by hand from the food list.
-- `apps-script/test`: 14 tests run the script against in-memory fakes of Sheets, Drive, Gemini and Mail: token,
+- `apps-script/test`: 15 tests run the script against in-memory fakes of Sheets, Drive, Gemini and Mail: token,
   setup and formulas, append without duplicates, photos, days, analyze with fallback model, and the weekly report.
 - The emulator run (GitHub Actions) taps through the whole loop in demo mode and publishes screenshots of every
   screen as a *UI check* pre-release.

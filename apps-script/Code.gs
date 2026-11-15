@@ -157,7 +157,10 @@ function analyze_(req) {
     if (r.code === 200) {
       var parsed = JSON.parse(answerText_(JSON.parse(r.text)));
       var out = { ok: true, model: models[i], items: parsed.items || [], note: parsed.note || '' };
-      if (hasPhoto && req.save_photo) out.photo_url = savePhoto_(req.image_b64, req.mime, req.meal_id);
+      if (hasPhoto && req.save_photo) {
+        var saved = trySavePhoto_(req.image_b64, req.mime, req.meal_id);
+        if (saved.url) out.photo_url = saved.url; else out.photo_error = saved.error;
+      }
       return out;
     }
     last = models[i] + ' answered ' + r.code + ': ' + String(r.text).slice(0, 200);
@@ -165,6 +168,15 @@ function analyze_(req) {
     if ([404, 429, 500, 503].indexOf(r.code) < 0) break;
   }
   return { ok: false, error: last };
+}
+
+/** Saving the photo is a nice-to-have: if Drive is not allowed, the meal is still logged. */
+function trySavePhoto_(b64, mime, mealId) {
+  try {
+    return { url: savePhoto_(b64, mime, mealId) };
+  } catch (err) {
+    return { error: 'Photo not saved (Drive permission missing: run checkPermissions in the script). ' + String((err && err.message) || err).slice(0, 120) };
+  }
 }
 
 function savePhoto_(b64, mime, mealId) {
@@ -195,8 +207,11 @@ function append_(req) {
     if (last > 1) log.getRange(2, idCol + 1, last - 1, 1).getValues().forEach(function (r) { seen[r[0]] = true; });
 
     var photoUrls = {};
+    var photoError = '';
     (req.meals || []).forEach(function (m) {
-      if (m.photo_b64 && m.meal_id) photoUrls[m.meal_id] = savePhoto_(m.photo_b64, m.mime, m.meal_id);
+      if (!m.photo_b64 || !m.meal_id) return;
+      var saved = trySavePhoto_(m.photo_b64, m.mime, m.meal_id);
+      if (saved.url) photoUrls[m.meal_id] = saved.url; else photoError = saved.error;
     });
 
     var fresh = [];
@@ -210,7 +225,9 @@ function append_(req) {
     if (fresh.length) log.getRange(last + 1, 1, fresh.length, header.length).setValues(fresh);
 
     var daysSaved = upsertDays_(ss, req.days || []);
-    return { ok: true, added: fresh.length, skipped: skipped, days: daysSaved, photo_urls: photoUrls };
+    var out = { ok: true, added: fresh.length, skipped: skipped, days: daysSaved, photo_urls: photoUrls };
+    if (photoError) out.photo_error = photoError;
+    return out;
   } finally {
     lock.releaseLock();
   }
@@ -306,6 +323,20 @@ function setup_() {
 
   get(TABS.weekly);
   return { log: log, days: days };
+}
+
+/**
+ * Run from the editor if the app reports a missing permission. Touches every Google service the script uses,
+ * so Google asks for all of them at once. On the consent screen tick EVERY box (Sheets, Drive, Gmail send,
+ * external requests, triggers); unticked boxes are what cause "You do not have permission to call ...".
+ */
+function checkPermissions() {
+  SpreadsheetApp.getActive().getName();
+  DriveApp.getRootFolder().getName();
+  MailApp.getRemainingDailyQuota();
+  UrlFetchApp.getRequest('https://generativelanguage.googleapis.com/');
+  ScriptApp.getProjectTriggers();
+  Logger.log('All permissions are in place: Sheets, Drive, Mail, outside requests and triggers.');
 }
 
 /** Run once from the editor: tabs, a token for the app, and the Sunday trigger. */
